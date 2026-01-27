@@ -1,16 +1,52 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+   output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+enum Role {
+  CUSTOMER
+  PROVIDER
+  ADMIN
+}
+
+enum OrderStatus {
+  PLACED
+  PREPARING
+  READY
+  DELIVERED
+  CANCELLED
+}
+
+model User {
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique
+  password String
+  role     Role   @default(CUSTOMER)
+
+  isActive Boolean @default(true)
+
+  provider ProviderProfile?
+  orders   Order[]
+  reviews  Review[]
+
+  createdAt DateTime @default(now())
+}
+
+model ProviderProfile {
+  id     String @id @default(uuid())
+  userId String @unique
+
+  shopName String
+  address  String
+  phone    String
+
+  user  User   @relation(fields: [userId], references: [id])
+  meals Meal[]
 }
 
 model Category {
@@ -23,62 +59,57 @@ model Category {
 model Meal {
   id          String  @id @default(uuid())
   name        String
+  description String
   price       Float
   image       String
-  description String?
+  isAvailable Boolean @default(true)
 
+  providerId String
   categoryId String
-  category   Category @relation(fields: [categoryId], references: [id])
+
+  provider ProviderProfile @relation(fields: [providerId], references: [id])
+  category Category        @relation(fields: [categoryId], references: [id])
+
+  orderItems OrderItem[]
+  reviews    Review[]
+}
+
+model Order {
+  id String @id @default(uuid())
+
+  userId  String
+  status  OrderStatus @default(PLACED)
+  address String
+  total   Float
+
+  user  User        @relation(fields: [userId], references: [id])
+  items OrderItem[]
 
   createdAt DateTime @default(now())
 }
 
+model OrderItem {
+  id String @id @default(uuid())
 
-// model User {
-//   id    String @id @default(uuid())
-//   name  String
-//   email String? @unique
+  orderId String
+  mealId  String
+  qty     Int
 
-//   // later: role, password, status
+  order Order @relation(fields: [orderId], references: [id])
+  meal  Meal  @relation(fields: [mealId], references: [id])
+}
 
-//   meals  Meal[]   // provider foods
-//   orders Order[]  // customer orders
+model Review {
+  id String @id @default(uuid())
 
-//   createdAt DateTime @default(now())
-// }
+  userId String
+  mealId String
 
-// model Category {
-//   id   String @id @default(uuid())
-//   name String @unique
+  rating  Int
+  comment String
 
-//   meals Meal[]
-// }
+  user User @relation(fields: [userId], references: [id])
+  meal Meal @relation(fields: [mealId], references: [id])
 
-// model Meal {
-//   id          String  @id @default(uuid())
-//   name        String
-//   price       Float
-//   image       String
-//   description String?
-
-//   providerId String
-//   provider   User @relation(fields: [providerId], references: [id])
-
-//   categoryId String
-//   category   Category @relation(fields: [categoryId], references: [id])
-
-//   createdAt DateTime @default(now())
-// }
-
-// model Order {
-//   id String @id @default(uuid())
-
-//   userId String
-//   user   User @relation(fields: [userId], references: [id])
-
-//   total   Float
-//   address String
-//   status  String @default("PLACED")
-
-//   createdAt DateTime @default(now())
-// }
+  createdAt DateTime @default(now())
+}
