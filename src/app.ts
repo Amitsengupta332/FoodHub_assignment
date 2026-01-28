@@ -3,6 +3,7 @@ import cors from "cors";
 import { toNodeHandler } from "better-auth/node";
 import { auth } from "./lib/auth";
 import { mealsRouter } from "./modules/meals/meals.route";
+import { categoryRouter } from "./modules/category/category.route";
 
 const app: Application = express();
 
@@ -11,7 +12,7 @@ app.use(
   cors({
     origin: process.env.APP_URL || "http://localhost:5000",
     credentials: true,
-  })
+  }),
 );
 
 app.all("/api/auth/*splat", toNodeHandler(auth));
@@ -19,6 +20,7 @@ app.all("/api/auth/*splat", toNodeHandler(auth));
 app.use(express.json());
 
 app.use("/api/meals", mealsRouter);
+app.use("/api/categories", categoryRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
