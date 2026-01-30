@@ -1,3 +1,4 @@
+
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -45,6 +46,8 @@ model User {
   provider ProviderProfile?
   orders   Order[]
   reviews  Review[]
+
+  status String? @default("ACTIVATE")
 
   @@map("user")
 }

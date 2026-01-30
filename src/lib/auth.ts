@@ -7,34 +7,21 @@ export const auth = betterAuth({
     provider: "postgresql", // or "mysql", "postgresql", ...etc
   }),
   trustedOrigins: [process.env.APP_URL!],
+  user: {
+    additionalFields: {
+      role: {
+        type: "string",
+        defaultValue: "CUSTOMER",
+        required: true,
+      },
+      status: {
+        type: "string",
+        defaultValue: "ACTIVATE",
+        required: false,
+      },
+    },
+  },
   emailAndPassword: {
     enabled: true,
   },
 });
-
-// export const auth = betterAuth({
-//   database: prismaAdapter(prisma, {
-//     provider: "postgresql",
-//   }),
-//   trustedOrigins: [process.env.APP_URL!],
-//   user: {
-//     additionalFields: {
-//       role: {
-//         type: "string",
-//         defaultValue: "CUSTOMER",
-//         required: true,
-//       },
-//       status: {
-//         type: "string",
-//         defaultValue: "ACTIVATE",
-//         required: false,
-//       },
-//     },
-//   },
-
-//   emailAndPassword: {
-//     enabled: true,
-//     minPasswordLength: 6,
-//     requireEmailVerification: true,
-//   },
-// });
