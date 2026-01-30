@@ -1,4 +1,204 @@
 
+// generator client {
+//   provider = "prisma-client"
+//   output   = "../src/generated/prisma"
+// }
+
+// datasource db {
+//   provider = "postgresql"
+// }
+
+// // ENUMS
+
+// enum Role {
+//   CUSTOMER
+//   PROVIDER
+//   ADMIN
+// }
+
+// enum OrderStatus {
+//   PLACED
+//   PREPARING
+//   READY
+//   DELIVERED
+//   CANCELLED
+// }
+
+// //////////////////////////////////////////////////
+// // BETTER-AUTH MODELS
+// //////////////////////////////////////////////////
+
+// model User {
+//   id            String  @id
+//   name          String
+//   email         String  @unique
+//   emailVerified Boolean @default(false)
+//   image         String?
+//   role          Role    @default(CUSTOMER)
+//   isActive      Boolean @default(true)
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   sessions Session[]
+//   accounts Account[]
+
+//   provider ProviderProfile?
+//   orders   Order[]
+//   reviews  Review[]
+
+//   status String? @default("ACTIVATE")
+
+//   @@map("user")
+// }
+
+// model Session {
+//   id        String   @id
+//   expiresAt DateTime
+//   token     String   @unique
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   ipAddress String?
+//   userAgent String?
+
+//   userId String
+//   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//   @@index([userId])
+//   @@map("session")
+// }
+
+// model Account {
+//   id         String @id
+//   accountId  String
+//   providerId String
+
+//   userId String
+//   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//   accessToken  String?
+//   refreshToken String?
+//   idToken      String?
+
+//   accessTokenExpiresAt  DateTime?
+//   refreshTokenExpiresAt DateTime?
+
+//   scope    String?
+//   password String?
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   @@index([userId])
+//   @@map("account")
+// }
+
+// model Verification {
+//   id         String   @id
+//   identifier String
+//   value      String
+//   expiresAt  DateTime
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   @@index([identifier])
+//   @@map("verification")
+// }
+
+// // FOODHUB MODELS
+
+// model ProviderProfile {
+//   id String @id @default(uuid())
+
+//   userId   String @unique
+//   shopName String
+//   address  String
+//   phone    String
+
+//   user User @relation(fields: [userId], references: [id])
+
+//   meals Meal[]
+
+//   createdAt DateTime @default(now())
+// }
+
+// model Category {
+//   id   String @id @default(uuid())
+//   name String @unique
+
+//   meals Meal[]
+// }
+
+// model Meal {
+//   id String @id @default(uuid())
+
+//   name        String
+//   description String
+//   price       Float
+//   image       String
+
+//   isAvailable Boolean @default(true)
+
+//   providerId String
+//   categoryId String
+
+//   provider ProviderProfile @relation(fields: [providerId], references: [id])
+//   category Category        @relation(fields: [categoryId], references: [id])
+
+//   orderItems OrderItem[]
+//   reviews    Review[]
+
+//   createdAt DateTime @default(now())
+// }
+
+// model Order {
+//   id String @id @default(uuid())
+
+//   userId String
+//   status OrderStatus @default(PLACED)
+
+//   address String
+//   total   Float
+
+//   user User @relation(fields: [userId], references: [id])
+
+//   items OrderItem[]
+
+//   createdAt DateTime @default(now())
+// }
+
+// model OrderItem {
+//   id String @id @default(uuid())
+
+//   orderId String
+//   mealId  String
+
+//   qty   Int
+//   price Float
+
+//   order Order @relation(fields: [orderId], references: [id])
+//   meal  Meal  @relation(fields: [mealId], references: [id])
+// }
+
+// model Review {
+//   id String @id @default(uuid())
+
+//   userId String
+//   mealId String
+
+//   rating  Int
+//   comment String
+
+//   user User @relation(fields: [userId], references: [id])
+//   meal Meal @relation(fields: [mealId], references: [id])
+
+//   createdAt DateTime @default(now())
+// }
+
+
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -8,7 +208,9 @@ datasource db {
   provider = "postgresql"
 }
 
+//////////////////////////////////////////////////
 // ENUMS
+//////////////////////////////////////////////////
 
 enum Role {
   CUSTOMER
@@ -25,17 +227,17 @@ enum OrderStatus {
 }
 
 //////////////////////////////////////////////////
-// BETTER-AUTH MODELS
+// AUTH MODELS (Better Auth Compatible)
 //////////////////////////////////////////////////
 
 model User {
-  id            String  @id
+  id            String   @id
   name          String
-  email         String  @unique
-  emailVerified Boolean @default(false)
+  email         String   @unique
+  emailVerified Boolean  @default(false)
   image         String?
-  role          Role    @default(CUSTOMER)
-  isActive      Boolean @default(true)
+  role          Role     @default(CUSTOMER)
+  isActive      Boolean  @default(true)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -46,8 +248,6 @@ model User {
   provider ProviderProfile?
   orders   Order[]
   reviews  Review[]
-
-  status String? @default("ACTIVATE")
 
   @@map("user")
 }
@@ -108,7 +308,9 @@ model Verification {
   @@map("verification")
 }
 
+//////////////////////////////////////////////////
 // FOODHUB MODELS
+//////////////////////////////////////////////////
 
 model ProviderProfile {
   id String @id @default(uuid())
@@ -120,9 +322,11 @@ model ProviderProfile {
 
   user User @relation(fields: [userId], references: [id])
 
-  meals Meal[]
+  meals  Meal[]
+  orders Order[]
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Category {
@@ -130,6 +334,9 @@ model Category {
   name String @unique
 
   meals Meal[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Meal {
@@ -152,22 +359,27 @@ model Meal {
   reviews    Review[]
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Order {
   id String @id @default(uuid())
 
-  userId String
+  userId     String
+  providerId String
+
   status OrderStatus @default(PLACED)
 
   address String
   total   Float
 
-  user User @relation(fields: [userId], references: [id])
+  user     User            @relation(fields: [userId], references: [id])
+  provider ProviderProfile @relation(fields: [providerId], references: [id])
 
   items OrderItem[]
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model OrderItem {
@@ -196,4 +408,7 @@ model Review {
   meal Meal @relation(fields: [mealId], references: [id])
 
   createdAt DateTime @default(now())
+
+  // One review per user per meal
+  @@unique([userId, mealId])
 }

@@ -11,7 +11,6 @@ declare global {
         email: string;
         image: string;
         role: string;
-        status: string;
       };
     }
   }
@@ -37,7 +36,6 @@ function auth(...roles: Role[]) {
         email: session.user.email,
         image: session.user.image as string,
         role: session.user.role,
-        status: session.user.status as string,
       };
 
       if (roles.length && !roles.includes(session.user.role as Role)) {
