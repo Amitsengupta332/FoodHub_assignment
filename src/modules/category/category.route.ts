@@ -12,5 +12,7 @@ router.get(
 );
 
 router.post("/", auth(Role.ADMIN), categoryController.createCategory);
+router.patch("/:id", categoryController.updateCategory);
+router.delete("/:id", categoryController.deleteCategory);
 
 export const categoryRouter = router;

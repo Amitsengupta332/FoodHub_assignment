@@ -39,9 +39,52 @@ const createCategory = async (req: Request, res: Response) => {
   }
 };
 
+
+const updateCategory = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const data = req.body;
+
+  try {
+    const result = await categoryService.updateCategory(id as string, data);
+
+    res.status(200).json({
+      success: true,
+      message: "Category updated successfully",
+      data: result,
+    });
+  } catch (e: any) {
+    res.status(400).json({
+      success: false,
+      message: "Category update failed. Please try again.",
+      error: e.message || e,
+    });
+  }
+};
+
+const deleteCategory = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const result = await categoryService.deleteCategory(id as string);
+
+    res.status(200).json({
+      success: true,
+      message: "Category deleted successfully",
+      data: result,
+    });
+  } catch (e: any) {
+    res.status(400).json({
+      success: false,
+      message: "Category delete failed. Please try again.",
+      error: e.message || e,
+    });
+  }
+};
+
+
 export const categoryController = {
   getAllCategory,
   createCategory,
-  //   updateCategory,
-  //   deleteCategory,
+    updateCategory,
+    deleteCategory,
 };
