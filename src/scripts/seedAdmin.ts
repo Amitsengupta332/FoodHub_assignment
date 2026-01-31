@@ -7,7 +7,6 @@ async function seedAdmin() {
       name: "Amit Sen Gupta",
       email: "amitAdmin@gmail.com",
       password: "password1234",
- 
       role: Role.ADMIN,
     };
 
@@ -39,7 +38,7 @@ async function seedAdmin() {
           email: adminData.email,
         },
         data: {
-          emailVerified: true,
+          emailVerified: false,
         },
       });
       console.log("successfully admin creation");
