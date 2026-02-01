@@ -1,8 +1,18 @@
 import { Router } from "express";
 import { mealsController } from "./meals.controller";
+import auth from "../../middlewares/auth";
+import { Role } from "../../generated/prisma/enums";
 
 const router = Router();
 
-router.post("/", mealsController.createMeals);
+// router.post("/", mealsController.createMeal);
+/** Public */
+router.get("/", mealsController.getAllMeals);
+router.get("/:id", mealsController.getMealDetails);
+
+/** Provider */
+router.post("/", auth(Role.PROVIDER), mealsController.createMeal);
+router.patch("/:id", auth(Role.PROVIDER), mealsController.updateMeal);
+router.delete("/:id", auth(Role.PROVIDER), mealsController.deleteMeal);
 
 export const mealsRouter = router;
