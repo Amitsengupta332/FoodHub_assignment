@@ -7,6 +7,7 @@ import { categoryRouter } from "./modules/category/category.route";
 import { providerProfileRouter } from "./modules/providerProfile/providerProfile.routes";
 import errorHandler from "./middlewares/globalErrorHandler";
 import { userRouter } from "./modules/user/user.route";
+import { orderRoute } from "./modules/order/order.route";
 
 const app: Application = express();
 
@@ -25,6 +26,8 @@ app.use(express.json());
 app.use("/api/admin/users", userRouter);
 app.use("/api/meals", mealsRouter);
 app.use("/api/categories", categoryRouter);
+app.use("/api/orders", orderRoute);
+
 app.use("/api/providers", providerProfileRouter);
 
 app.get("/", (req, res) => {
