@@ -30,7 +30,6 @@
 
 import { Prisma } from "../../generated/prisma/client";
 import { prisma } from "../../lib/prisma";
- 
 
 const getAllProvider = async () => {
   return prisma.providerProfile.findMany({
@@ -54,7 +53,10 @@ const getProviderWithMenu = async (id: string) => {
 
 const createProviderProfile = async (
   userId: string,
-  payload: Pick<Prisma.ProviderProfileCreateInput, "shopName" | "address" | "phone">,
+  payload: Pick<
+    Prisma.ProviderProfileCreateInput,
+    "shopName" | "address" | "phone"
+  >,
 ) => {
   const existing = await prisma.providerProfile.findUnique({
     where: { userId },

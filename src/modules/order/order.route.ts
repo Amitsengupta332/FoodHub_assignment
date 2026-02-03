@@ -11,6 +11,11 @@ router.get(
   orderController.getUsersOrders,
 );
 
+router.get(
+  "/provider",
+  auth(Role.PROVIDER),
+  orderController.getProviderOrders
+);
 router.get("/all", auth(Role.ADMIN), orderController.getAllOrders);
 
 router.get(
@@ -29,6 +34,12 @@ router.post(
   "/",
   auth(Role.CUSTOMER, Role.PROVIDER),
   orderController.orderCreate,
+);
+
+router.patch(
+  "/:id",
+  auth(Role.PROVIDER),
+  orderController.updateOrderStatus,
 );
 
 export const orderRoute = router;

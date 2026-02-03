@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import { orderService } from "./order.service";
+import { prisma } from "../../lib/prisma";
+import { OrderStatus } from "../../generated/prisma/enums";
 
 const orderCreate = async (req: Request, res: Response) => {
   const userId = req.user?.id;
@@ -23,6 +25,37 @@ const orderCreate = async (req: Request, res: Response) => {
       success: false,
       message: "Order creation failed. Please try again.",
       error: error.message || error,
+    });
+  }
+};
+
+const getProviderOrders = async (req: Request, res: Response) => {
+  const providerUserId = req.user?.id;
+
+  try {
+    // providerUserId -> ProviderProfile.id বের করে orders আনো
+    const profile = await prisma.providerProfile.findUnique({
+      where: { userId: providerUserId as string },
+    });
+
+    if (!profile) {
+      return res.status(404).json({
+        success: false,
+        message: "Provider profile not found",
+      });
+    }
+
+    const result = await orderService.getOrderForProvider(profile.id);
+
+    res.status(200).json({
+      success: true,
+      message: "Provider orders fetched successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message || "Failed to fetch provider orders",
     });
   }
 };
@@ -105,10 +138,38 @@ const getOrderForProvider = async (req: Request, res: Response) => {
   }
 };
 
+const updateOrderStatus = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    if (!status) {
+      return res.status(400).json({
+        success: false,
+        message: "status is required",
+      });
+    }
+
+    const result = await orderService.updateOrderStatus(id as string, status as OrderStatus);
+
+    res.status(200).json({
+      success: true,
+      message: "Order status updated successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message || "Failed to update order status",
+    });
+  }
+};
 export const orderController = {
   orderCreate,
   getAllOrders,
+  getProviderOrders,
   getOrderForProvider,
   getUsersOrders,
   getOrderDetails,
+  updateOrderStatus,
 };

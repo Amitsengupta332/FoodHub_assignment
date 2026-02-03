@@ -8,6 +8,7 @@ import { providerProfileRouter } from "./modules/providerProfile/providerProfile
 import errorHandler from "./middlewares/globalErrorHandler";
 import { userRouter } from "./modules/user/user.route";
 import { orderRoute } from "./modules/order/order.route";
+import { ReviewRoutes } from "./modules/review/review.routes";
 
 const app: Application = express();
 
@@ -27,7 +28,8 @@ app.use("/api/admin/users", userRouter);
 app.use("/api/meals", mealsRouter);
 app.use("/api/categories", categoryRouter);
 app.use("/api/orders", orderRoute);
-
+app.use("/api/provider/orders", orderRoute);
+app.use("/api/review", ReviewRoutes);
 app.use("/api/providers", providerProfileRouter);
 
 app.get("/", (req, res) => {
