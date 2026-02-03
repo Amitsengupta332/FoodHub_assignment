@@ -5,14 +5,22 @@ import { Role } from "../../generated/prisma/enums";
 
 const router = Router();
 
-router.get(
-  "/",
-  auth(Role.ADMIN, Role.PROVIDER),
-  categoryController.getAllCategory,
-);
+// router.get(
+//   "/",
+//   auth(Role.ADMIN, Role.PROVIDER),
+//   categoryController.getAllCategory,
+// );
 
+// router.post("/", auth(Role.ADMIN), categoryController.createCategory);
+// router.patch("/:id", categoryController.updateCategory);
+// router.delete("/:id", categoryController.deleteCategory);
+
+/** ✅ Public (required for browsing & filters) */
+router.get("/", categoryController.getAllCategory);
+
+/** ✅ Admin only manage categories */
 router.post("/", auth(Role.ADMIN), categoryController.createCategory);
-router.patch("/:id", categoryController.updateCategory);
-router.delete("/:id", categoryController.deleteCategory);
+router.patch("/:id", auth(Role.ADMIN), categoryController.updateCategory);
+router.delete("/:id", auth(Role.ADMIN), categoryController.deleteCategory);
 
 export const categoryRouter = router;

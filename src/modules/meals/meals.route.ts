@@ -7,11 +7,22 @@ const router = Router();
 
 // router.post("/", mealsController.createMeal);
 /** Public */
+// router.get("/", mealsController.getAllMeals);
+// router.get("/:id", mealsController.getMealDetails);
+
+// /** Provider */
+// router.post("/", auth(Role.PROVIDER), mealsController.createMeal);
+// router.patch("/:id", auth(Role.PROVIDER), mealsController.updateMeal);
+// router.delete("/:id", auth(Role.PROVIDER), mealsController.deleteMeal);
+
+
+/** Public */
 router.get("/", mealsController.getAllMeals);
 router.get("/:id", mealsController.getMealDetails);
 
 /** Provider */
 router.post("/", auth(Role.PROVIDER), mealsController.createMeal);
+router.get("/provider/my", auth(Role.PROVIDER), mealsController.getProviderMeals);
 router.patch("/:id", auth(Role.PROVIDER), mealsController.updateMeal);
 router.delete("/:id", auth(Role.PROVIDER), mealsController.deleteMeal);
 

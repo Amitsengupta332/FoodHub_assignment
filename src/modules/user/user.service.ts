@@ -1,9 +1,23 @@
 import { prisma } from "../../lib/prisma";
 
 
+// const getAllUsers = async () => {
+//   return await prisma.user.findMany();
+// };
+
 const getAllUsers = async () => {
-  return await prisma.user.findMany();
+  return prisma.user.findMany({
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+      isActive: true,
+      createdAt: true,
+    },
+  });
 };
+
 
 const updateUserStatus = async (id: string, isActive: boolean) => {
   return await prisma.user.update({

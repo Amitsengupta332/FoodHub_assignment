@@ -1,0 +1,805 @@
+{
+  "info": {
+    "_postman_id": "8e929725-d87c-4897-ae0e-f33fa5f97132",
+    "name": "FoodHub",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "31187154",
+    "_collection_link": "https://go.postman.co/collection/31187154-8e929725-d87c-4897-ae0e-f33fa5f97132?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "sign-in",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "// {\r\n//      \"email\": \"amitsengupta0332@gmail.com\",\r\n//     \"password\": \"password1234\"\r\n// }\r\n// {\r\n//     \"email\": \"amitsengupta332@gmail.com\",\r\n//     \"password\": \"password1234\"\r\n// }\r\n{\r\n    \"email\": \"amitsengupta1@gmail.com\",\r\n    \"password\": \"password1234\"\r\n}\r\n\r\n// {\r\n//     \"email\": \"amitsenguptaProvider@gmail.com\",\r\n//     \"password\": \"password1234\"\r\n// }\r\n// {\r\n//     \"email\": \"amitsenguptaProvider@gmail.com\",\r\n//     \"password\": \"password1234\"\r\n// }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/auth/sign-in/email",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "auth",
+            "sign-in",
+            "email"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "sign-up",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "// {\r\n//     \"name\": \"Amit Sengupta\",\r\n//     \"email\": \"amitsengupta0332@gmail.com\",\r\n//     \"password\": \"password1234\"\r\n// }\r\n// {\r\n//   \"name\": \"Amit Sen Provider\",\r\n//   \"email\": \"amitsenguptaProvider@gmail.com\",\r\n//   \"password\": \"password1234\"\r\n// }\r\n// {\r\n//     \"name\": \"Amit Sen \",\r\n//     \"email\": \"amitsengupta332@gmail.com\",\r\n//     \"password\": \"password1234\"\r\n// }\r\n{\r\n    \"name\": \"Amit Sen1 \",\r\n    \"email\": \"amitsengupta1@gmail.com\",\r\n    \"password\": \"password1234\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/auth/sign-up/email",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "auth",
+            "sign-up",
+            "email"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get all user",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/admin/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "admin",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get All Category",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/categories",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "categories"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Meals",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/meals",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "meals"
+          ],
+          "query": [
+            {
+              "key": "maxPrice",
+              "value": "300",
+              "disabled": true
+            },
+            {
+              "key": "search",
+              "value": "burger",
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update all user",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"isActive\": false\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/admin/users/slmWieoSepaTtoLqYgZTf26ZA86KdTyx",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "admin",
+            "users",
+            "slmWieoSepaTtoLqYgZTf26ZA86KdTyx"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Category",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Chona Muri\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/categories/031bd45d-a638-49ae-acac-a6b39236a550",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "categories",
+            "031bd45d-a638-49ae-acac-a6b39236a550"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Meal",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"belpuri\",\r\n    \"price\": 200,\r\n    \"description\": \"Spicy belpuri\"\r\n    //   \"isAvailable\": false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/meals/73791dd3-23b4-4d19-8532-b2ba88be562c",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "meals",
+            "73791dd3-23b4-4d19-8532-b2ba88be562c"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Category",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Chona Muri\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/categories/19eaaf06-cbf2-4aac-8ff9-7b8d994cccfa",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "categories",
+            "19eaaf06-cbf2-4aac-8ff9-7b8d994cccfa"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Meal",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Chona Muri\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/meals/c092991f-d960-4f21-bc77-0613cd336ef6",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "meals",
+            "c092991f-d960-4f21-bc77-0613cd336ef6"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create meals",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Chicken chona muri\",\r\n    \"description\": \"Spicy chona muri\",\r\n    \"price\": 250,\r\n    \"image\": \"https://img.com/burger.jpg\",\r\n    \"categoryId\": \"b2dae8b6-f240-4f06-88e0-e43d847a3a6f\"\r\n}\r\n// {\r\n//   \"name\": \"Chicken Burger\",\r\n//   \"description\": \"Spicy burger\",\r\n//   \"price\": 250,\r\n//   \"image\": \"https://img.com/burger.jpg\",\r\n//   \"categoryId\": \"b2dae8b6-f240-4f06-88e0-e43d847a3a6f\",\r\n//   \"providerId\": \"8c3d14b9-7f9a-4cdf-af03-b4d0820bd4d0\"\r\n// }\r\n// {\r\n//   \"name\": \"Chicken Burger\",\r\n//   \"description\": \"Spicy chicken burger\",\r\n//   \"price\": 180,\r\n//   \"image\": \"https://i.ibb.co/xxx/burger.jpg\",\r\n//   \"categoryId\": \"2253b34b-4782-406e-bc38-e4387a863812\",\r\n//   \"isAvailable\": true\r\n// }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/meals",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "meals"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"providerId\": \"8c3d14b9-7f9a-4cdf-af03-b4d0820bd4d0\",\r\n  \"address\": \"Chittagong\",\r\n  \"items\": [\r\n    {\r\n      \"mealId\": \"9ce1d73d-12ac-43c9-b508-95f2893bd2e3\",\r\n      \"qty\": 1\r\n    },\r\n    {\r\n      \"mealId\": \"0d81dc1b-9f2c-47d3-8eab-4e6371b038a3\",\r\n      \"qty\": 2\r\n    }\r\n  ]\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "orders"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get  orders",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Chicken chona muri\",\r\n    \"description\": \"Spicy chona muri\",\r\n    \"price\": 250,\r\n    \"image\": \"https://img.com/burger.jpg\",\r\n    \"categoryId\": \"b2dae8b6-f240-4f06-88e0-e43d847a3a6f\"\r\n}\r\n// {\r\n//   \"name\": \"Chicken Burger\",\r\n//   \"description\": \"Spicy burger\",\r\n//   \"price\": 250,\r\n//   \"image\": \"https://img.com/burger.jpg\",\r\n//   \"categoryId\": \"b2dae8b6-f240-4f06-88e0-e43d847a3a6f\",\r\n//   \"providerId\": \"8c3d14b9-7f9a-4cdf-af03-b4d0820bd4d0\"\r\n// }\r\n// {\r\n//   \"name\": \"Chicken Burger\",\r\n//   \"description\": \"Spicy chicken burger\",\r\n//   \"price\": 180,\r\n//   \"image\": \"https://i.ibb.co/xxx/burger.jpg\",\r\n//   \"categoryId\": \"2253b34b-4782-406e-bc38-e4387a863812\",\r\n//   \"isAvailable\": true\r\n// }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "orders"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get all orders",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Chicken chona muri\",\r\n    \"description\": \"Spicy chona muri\",\r\n    \"price\": 250,\r\n    \"image\": \"https://img.com/burger.jpg\",\r\n    \"categoryId\": \"b2dae8b6-f240-4f06-88e0-e43d847a3a6f\"\r\n}\r\n// {\r\n//   \"name\": \"Chicken Burger\",\r\n//   \"description\": \"Spicy burger\",\r\n//   \"price\": 250,\r\n//   \"image\": \"https://img.com/burger.jpg\",\r\n//   \"categoryId\": \"b2dae8b6-f240-4f06-88e0-e43d847a3a6f\",\r\n//   \"providerId\": \"8c3d14b9-7f9a-4cdf-af03-b4d0820bd4d0\"\r\n// }\r\n// {\r\n//   \"name\": \"Chicken Burger\",\r\n//   \"description\": \"Spicy chicken burger\",\r\n//   \"price\": 180,\r\n//   \"image\": \"https://i.ibb.co/xxx/burger.jpg\",\r\n//   \"categoryId\": \"2253b34b-4782-406e-bc38-e4387a863812\",\r\n//   \"isAvailable\": true\r\n// }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/orders/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "orders",
+            "all"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get all orders Copy",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Chicken chona muri\",\r\n    \"description\": \"Spicy chona muri\",\r\n    \"price\": 250,\r\n    \"image\": \"https://img.com/burger.jpg\",\r\n    \"categoryId\": \"b2dae8b6-f240-4f06-88e0-e43d847a3a6f\"\r\n}\r\n// {\r\n//   \"name\": \"Chicken Burger\",\r\n//   \"description\": \"Spicy burger\",\r\n//   \"price\": 250,\r\n//   \"image\": \"https://img.com/burger.jpg\",\r\n//   \"categoryId\": \"b2dae8b6-f240-4f06-88e0-e43d847a3a6f\",\r\n//   \"providerId\": \"8c3d14b9-7f9a-4cdf-af03-b4d0820bd4d0\"\r\n// }\r\n// {\r\n//   \"name\": \"Chicken Burger\",\r\n//   \"description\": \"Spicy chicken burger\",\r\n//   \"price\": 180,\r\n//   \"image\": \"https://i.ibb.co/xxx/burger.jpg\",\r\n//   \"categoryId\": \"2253b34b-4782-406e-bc38-e4387a863812\",\r\n//   \"isAvailable\": true\r\n// }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/provider/orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "provider",
+            "orders"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get all orders Copy 2",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"status\": \"DELIVERED\" }\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/provider/orders/9a7cac42-be26-4e4e-acc3-04e04e40e2c3",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "provider",
+            "orders",
+            "9a7cac42-be26-4e4e-acc3-04e04e40e2c3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get provider order details",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Chicken chona muri\",\r\n    \"description\": \"Spicy chona muri\",\r\n    \"price\": 250,\r\n    \"image\": \"https://img.com/burger.jpg\",\r\n    \"categoryId\": \"b2dae8b6-f240-4f06-88e0-e43d847a3a6f\"\r\n}\r\n// {\r\n//   \"name\": \"Chicken Burger\",\r\n//   \"description\": \"Spicy burger\",\r\n//   \"price\": 250,\r\n//   \"image\": \"https://img.com/burger.jpg\",\r\n//   \"categoryId\": \"b2dae8b6-f240-4f06-88e0-e43d847a3a6f\",\r\n//   \"providerId\": \"8c3d14b9-7f9a-4cdf-af03-b4d0820bd4d0\"\r\n// }\r\n// {\r\n//   \"name\": \"Chicken Burger\",\r\n//   \"description\": \"Spicy chicken burger\",\r\n//   \"price\": 180,\r\n//   \"image\": \"https://i.ibb.co/xxx/burger.jpg\",\r\n//   \"categoryId\": \"2253b34b-4782-406e-bc38-e4387a863812\",\r\n//   \"isAvailable\": true\r\n// }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/orders/19c1fec8-8b12-4860-9686-8fbd31f1d42d",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "orders",
+            "19c1fec8-8b12-4860-9686-8fbd31f1d42d"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create category",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Chona Murirrr\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/categories",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "categories"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create review",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": " {\r\n  \"mealId\": \"9ce1d73d-12ac-43c9-b508-95f2893bd2e3\",\r\n  \"rating\": 5,\r\n  \"comment\": \"Awesome!\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/review",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "review"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "providerProfile",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"shopName\": \"Amit Foods\",\r\n  \"address\": \"Chittagong\",\r\n  \"phone\": \"01700000000\",\r\n  \"userId\": \"v8AuNgTNhwBOD0zdRzHMXxNSLktne6F7\"\r\n}\r\n\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/providers",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "providers"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get providerProfile",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Origin",
+            "value": "http://localhost:5000",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"shopName\": \"Amit Foods\",\r\n  \"address\": \"Chittagong\",\r\n  \"phone\": \"01700000000\",\r\n  \"userId\": \"v8AuNgTNhwBOD0zdRzHMXxNSLktne6F7\"\r\n}\r\n\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/providers",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "providers"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

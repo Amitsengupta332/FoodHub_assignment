@@ -19,21 +19,29 @@ app.use(
     credentials: true,
   }),
 );
+app.use(express.json());
 
 app.all("/api/auth/*splat", toNodeHandler(auth));
 
-app.use(express.json());
 
+// app.use("/api/admin/users", userRouter);
+// app.use("/api/meals", mealsRouter);
+// app.use("/api/categories", categoryRouter);
+// app.use("/api/orders", orderRoute);
+// app.use("/api/provider/orders", orderRoute);
+// app.use("/api/review", ReviewRoutes);
+// app.use("/api/providers", providerProfileRouter);
+
+// ✅ routes
 app.use("/api/admin/users", userRouter);
 app.use("/api/meals", mealsRouter);
 app.use("/api/categories", categoryRouter);
 app.use("/api/orders", orderRoute);
-app.use("/api/provider/orders", orderRoute);
 app.use("/api/review", ReviewRoutes);
 app.use("/api/providers", providerProfileRouter);
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("FoodHub API Running!");
 });
 
 // app.use(notFound);

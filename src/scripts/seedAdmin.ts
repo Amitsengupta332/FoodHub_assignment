@@ -3,10 +3,16 @@ import { prisma } from "../lib/prisma";
 
 async function seedAdmin() {
   try {
+    // const adminData = {
+    //   name: "Amit Sen Gupta",
+    //   email: "amitAdmin@gmail.com",
+    //   password: "password1234",
+    //   role: Role.ADMIN,
+    // };
     const adminData = {
-      name: "Amit Sen Gupta",
-      email: "amitAdmin@gmail.com",
-      password: "password1234",
+      name: process.env.ADMIN_NAME || "FoodHub Admin",
+      email: process.env.ADMIN_EMAIL || "admin@foodhub.com",
+      password: process.env.ADMIN_PASSWORD || "admin1234",
       role: Role.ADMIN,
     };
 
