@@ -1,33 +1,3 @@
-// import { ProviderProfile } from "../../generated/prisma/client";
-// import { prisma } from "../../lib/prisma";
-
-// const getAllProvider = async () => {
-//   return await prisma.providerProfile.findMany();
-// };
-
-// const getProviderWithMenu = async (id: string) => {
-//   return await prisma.providerProfile.findMany({
-//     where: {
-//       id,
-//     },
-//     include: {
-//       meals: true,
-//     },
-//   });
-// };
-
-// const createProviderProfile = async (data: ProviderProfile) => {
-//   return await prisma.providerProfile.create({
-//     data,
-//   });
-// };
-
-// export const providerProfileService = {
-//   createProviderProfile,
-//   getProviderWithMenu,
-//   getAllProvider,
-// };
-
 import { Prisma } from "../../generated/prisma/client";
 import { prisma } from "../../lib/prisma";
 
