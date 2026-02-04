@@ -1,25 +1,3 @@
-// import { Review } from "../../generated/prisma/client";
-// import { prisma } from "../../lib/prisma";
-
-
-
-// const createReview = async (payload: Review) => {
-//   const result = await prisma.review.create({
-//     data: {
-//       rating: payload.rating,
-//       comment: payload.comment,
-//       mealId: payload.mealId,
-//       userId: payload.userId
-//     },
-//   });
-
-//   return result;
-// };
-
-// export const ReviewService = {
-//   createReview,
-// };
-
 import { prisma } from "../../lib/prisma";
 
 type CreateReviewPayload = {
