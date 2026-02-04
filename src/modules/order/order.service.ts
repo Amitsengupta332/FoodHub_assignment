@@ -1,91 +1,5 @@
-import { Order, OrderStatus } from "../../generated/prisma/client";
+import { OrderStatus } from "../../generated/prisma/client";
 import { prisma } from "../../lib/prisma";
-
-// // const createOrders = async (data: Order)  => {
-// //   return await prisma.order.create({
-// //     data,
-// //   });
-// // };
-
-// const createOrders = async (userId: string, payload: any) => {
-//   const mealIds = payload.items.map((i: any) => i.mealId);
-
-//   const meals = await prisma.meal.findMany({
-//     where: { id: { in: mealIds } },
-//     select: { id: true, price: true, providerId: true },
-//   });
-
-//   const total = payload.items.reduce((sum: number, item: any) => {
-//     const meal = meals.find(m => m.id === item.mealId);
-//     return sum + (meal!.price * item.qty);
-//   }, 0);
-
-//   return prisma.order.create({
-//     data: {
-//       userId,
-//       providerId: payload.providerId,
-//       address: payload.address,
-//       total,
-//       items: {
-//         create: payload.items.map((i: any) => {
-//           const meal = meals.find(m => m.id === i.mealId)!;
-//           return { mealId: i.mealId, qty: i.qty, price: meal.price };
-//         }),
-//       },
-//     },
-//     include: { items: true },
-//   });
-// };
-
-// // (data: Order)
-// const getUsersOrders = async (id: string) => {
-//   return await prisma.order.findMany({
-//     where: {
-//       userId: id,
-//     },
-//   });
-// };
-
-// const getAllOrders = async () => {
-//   return await prisma.order.findMany();
-// };
-
-// const getOrderDetails = async (id: string) => {
-//   return await prisma.order.findUnique({
-//     where: {
-//       id,
-//     },
-//     include: {
-//       provider: true,
-//     },
-//   });
-// };
-
-// const getOrderForProvider = async (id: string) => {
-//   return await prisma.order.findMany({
-//     where: {
-//       providerId: id,
-//     },
-//   });
-// };
-
-// const updateOrderStatus = async (orderId: string, status: OrderStatus) => {
-//   return prisma.order.update({
-//     where: { id: orderId },
-//     data: { status },
-//   });
-// };
-
-
-// export const orderService = {
-//   createOrders,
-//   getAllOrders,
-//   getOrderForProvider,
-//   getUsersOrders,
-//   getOrderDetails,
-//   updateOrderStatus
-// };
-
 
 type CreateOrderPayload = {
   address: string;
@@ -94,7 +8,8 @@ type CreateOrderPayload = {
 
 const createOrders = async (userId: string, payload: CreateOrderPayload) => {
   if (!payload.address) throw new Error("address is required");
-  if (!Array.isArray(payload.items) || payload.items.length === 0) throw new Error("items are required");
+  if (!Array.isArray(payload.items) || payload.items.length === 0)
+    throw new Error("items are required");
 
   const mealIds = payload.items.map((i) => i.mealId);
 
@@ -112,11 +27,11 @@ const createOrders = async (userId: string, payload: CreateOrderPayload) => {
   if (providerIdSet.size !== 1) {
     throw new Error("You can order items from only one provider per order.");
   }
-if (meals.length === 0) {
-  throw new Error("No meals found");
-}
+  if (meals.length === 0) {
+    throw new Error("No meals found");
+  }
 
-const providerId = meals[0]!.providerId;
+  const providerId = meals[0]!.providerId;
 
   // ✅ Calculate total from DB prices (no client trust)
   const total = payload.items.reduce((sum, item) => {
@@ -153,7 +68,11 @@ const getUsersOrders = async (userId: string) => {
 
 const getAllOrders = async () => {
   return prisma.order.findMany({
-    include: { items: true, provider: true, user: { select: { id: true, name: true, email: true } } },
+    include: {
+      items: true,
+      provider: true,
+      user: { select: { id: true, name: true, email: true } },
+    },
     orderBy: { createdAt: "desc" },
   });
 };
@@ -213,7 +132,9 @@ const updateOrderStatusByProvider = async (
 
   // ✅ transition
   if (!canTransition(order.status, nextStatus)) {
-    throw new Error(`Invalid status transition: ${order.status} -> ${nextStatus}`);
+    throw new Error(
+      `Invalid status transition: ${order.status} -> ${nextStatus}`,
+    );
   }
 
   return prisma.order.update({
@@ -222,12 +143,16 @@ const updateOrderStatusByProvider = async (
   });
 };
 
-const cancelOrderByCustomer = async (customerUserId: string, orderId: string) => {
+const cancelOrderByCustomer = async (
+  customerUserId: string,
+  orderId: string,
+) => {
   const order = await prisma.order.findUnique({ where: { id: orderId } });
   if (!order) throw new Error("Order not found");
 
   if (order.userId !== customerUserId) throw new Error("Forbidden");
-  if (order.status !== "PLACED") throw new Error("Only PLACED orders can be cancelled");
+  if (order.status !== "PLACED")
+    throw new Error("Only PLACED orders can be cancelled");
 
   return prisma.order.update({
     where: { id: orderId },
