@@ -14,3 +14,4 @@ router.patch("/:id", auth(Role.ADMIN), categoryController.updateCategory);
 router.delete("/:id", auth(Role.ADMIN), categoryController.deleteCategory);
 
 export const categoryRouter = router;
+  

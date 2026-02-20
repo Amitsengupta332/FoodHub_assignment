@@ -17,7 +17,7 @@ const getAllUsers = async (req: Request, res: Response) => {
       error: e.message || e,
     });
   }
-};
+}; 
 
 const updateUserStatus = async (req: Request, res: Response) => {
   const { id } = req.params;

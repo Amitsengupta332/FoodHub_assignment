@@ -19,7 +19,7 @@ const updateUserStatus = async (id: string, isActive: boolean) => {
     data: { isActive },
   });
 };
-
+ 
 export const userService = {
   getAllUsers,
   updateUserStatus,

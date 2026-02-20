@@ -1,7 +1,7 @@
 import { prisma } from "../../lib/prisma";
 
 type CreateReviewPayload = {
-  mealId: string;
+  mealId: string; 
   rating: number;
   comment: string;
   userId: string;

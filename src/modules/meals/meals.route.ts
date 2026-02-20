@@ -16,4 +16,4 @@ router.get("/provider/my", auth(Role.PROVIDER), mealsController.getProviderMeals
 router.patch("/:id", auth(Role.PROVIDER), mealsController.updateMeal);
 router.delete("/:id", auth(Role.PROVIDER), mealsController.deleteMeal);
 
-export const mealsRouter = router;
+export const mealsRouter = router;  

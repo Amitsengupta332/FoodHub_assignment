@@ -20,7 +20,8 @@ const getAllCategory = async (req: Request, res: Response) => {
 
 const createCategory = async (req: Request, res: Response) => {
   const data = req.body;
-
+  console.log("User:", req.user);
+  console.log("Body:", req.body);
   try {
     const result = await categoryService.createCategory(data);
 

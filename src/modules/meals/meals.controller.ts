@@ -23,8 +23,8 @@ const createMeal = async (req: Request, res: Response) => {
       message: "Meal creation failed",
       error: error.message,
     });
-  }
-};
+  } 
+}; 
 
 const getProviderMeals = async (req: Request, res: Response) => {
   const providerUserId = req.user?.id;

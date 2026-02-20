@@ -18,7 +18,7 @@ const getProviderWithMenu = async (id: string) => {
       meals: { where: { isAvailable: true }, orderBy: { createdAt: "desc" } },
       user: { select: { id: true, name: true } },
     },
-  });
+  }); 
 };
 
 const createProviderProfile = async (

@@ -28,7 +28,7 @@ const getProviderWithMenu = async (req: Request, res: Response) => {
     const result = await providerProfileService.getProviderWithMenu(
       id as string,
     );
-
+ 
     if (!result) {
       return res
         .status(404)

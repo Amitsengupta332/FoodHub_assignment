@@ -22,7 +22,7 @@ const createMeal = async (providerUserId: string, data: any) => {
       providerId: providerProfile.id,
     },
   });
-};
+}; 
 
 /**
  * ✅ GET PROVIDER MEALS (fix: userId -> providerProfile.id)

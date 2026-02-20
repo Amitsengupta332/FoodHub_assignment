@@ -15,7 +15,7 @@ router.patch("/:id/cancel", auth(Role.CUSTOMER), orderController.cancelOrder);
 router.get("/provider", auth(Role.PROVIDER), orderController.getProviderOrders);
 router.patch("/:id", auth(Role.PROVIDER), orderController.updateOrderStatus);
 
-/** Admin: all orders */
+/** Admin: all orders */ 
 router.get("/all", auth(Role.ADMIN), orderController.getAllOrders);
 
 /** Details (customer/provider/admin) */

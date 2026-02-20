@@ -1,7 +1,7 @@
 import { OrderStatus } from "../../generated/prisma/client";
 import { prisma } from "../../lib/prisma";
-
-type CreateOrderPayload = {
+ 
+type CreateOrderPayload = { 
   address: string;
   items: { mealId: string; qty: number }[];
 };

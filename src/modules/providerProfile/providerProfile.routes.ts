@@ -14,4 +14,4 @@ router.post(
   providerProfileController.createProviderProfile,
 );
 
-export const providerProfileRouter = router;
+export const providerProfileRouter = router; 
